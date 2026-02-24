@@ -23,10 +23,48 @@ class MinMaxStackImplTest {
 
     @Test
     public void testIfMaxIsPopped() {
-        this.stack.push(1);
-        this.stack.push(10);
-        this.stack.push(100);
-        this.stack.pop();
-        assertEquals(10, this.stack.getMax());
+        for (int i = 0; i < 3; i++) {
+            this.stack.push(i);
+        }
+        assertEquals(2, this.stack.pop());
+        assertEquals(1, this.stack.getMax());
+    }
+
+    @Test
+    public void testIfMinIsPopped() {
+        for (int i = 3; i > 0; i--) {
+            this.stack.push(i);
+        }
+        assertEquals(1, this.stack.pop());
+        assertEquals(2, this.stack.getMin());
+    }
+
+    @Test
+    public void testNewMaxValuePush() {
+        int value = 10;
+        this.stack.push(value);
+        assertEquals(value, this.stack.getMax());
+        this.stack.push(value*value);
+        assertEquals(value*value, this.stack.getMax());
+    }
+
+    @Test
+    public void testPoppingFromEmptyStack() {
+        assertThrows(IllegalStateException.class, this.stack::pop);
+    }
+
+    @Test
+    public void testPeekingFromEmptyStack() {
+        assertThrows(IllegalStateException.class, this.stack::peek);
+    }
+
+    @Test
+    public void testGettingMaxFromEmptyStack() {
+        assertThrows(IllegalStateException.class, this.stack::getMax);
+    }
+
+    @Test
+    public void testGettingMinFromEmptyStack() {
+        assertThrows(IllegalStateException.class, this.stack::getMin);
     }
 }
